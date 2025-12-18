@@ -77,7 +77,9 @@ func ResourceCredential() common.Resource {
 
 			// Update owner or isolation mode if it is provided
 			if !updateRequired(d, []string{"owner", "isolation_mode"}) {
-				return nil
+				// Set credential_id and populate state from the create response
+				d.Set("credential_id", cred.Id)
+				return common.StructToData(cred, credentialSchema, d)
 			}
 
 			var update catalog.UpdateCredentialRequest

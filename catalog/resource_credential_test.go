@@ -28,10 +28,14 @@ func TestCreateCredential(t *testing.T) {
 			}).Return(&catalog.CredentialInfo{
 				Name: "a",
 				AwsIamRole: &catalog.AwsIamRole{
-					RoleArn: "def",
+					RoleArn:    "def",
+					ExternalId: "123",
 				},
-				Purpose: "SERVICE",
-				Comment: "c",
+				Purpose:     "SERVICE",
+				Comment:     "c",
+				Id:          "1234-5678",
+				MetastoreId: "d",
+				Owner:       "f",
 			}, nil)
 			e.GetCredentialByNameArg(mock.Anything, "a").Return(&catalog.CredentialInfo{
 				Name: "a",
